@@ -1,0 +1,14 @@
+ .carta{width: 792px;height: 612px;}
+        .flotante{float: left; position: absolute;margin-left: 700px;}
+        #Frase{font-size: 24px;}
+       @media print{    
+           .no-print, .no-print *{display: none !important;}
+        }
+        input[type="file"] {display: none;}
+        .custom-file-upload {
+            border: 1px solid #ccc;display: inline-block;
+            padding: 6px 12px;cursor: pointer;
+        }
+        .month_name{
+            background-color: #ff0000;
+            color: white;}
