@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload de archivos a OneDrive</title>
+    <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+   
+</head>
+<body>
+       
+    <img src="" id="imagen" width="40" alt=""><br><br><br>
+    <input id="texto" type="text" /><br><br><br><br>
+    <a id="link" href="">Descargar Archivo </a><br><br>
+    <br>
+    <br>
+    <br/>
+    <script type="text/javascript">
+         function launchOneDrivePicker() {
+        var odOptions = {
+            clientId: "a3593842-6319-4d19-b96a-83839de79bd9", // ID que se genera cuando se da de alta
+            action: "query", // tipo de solicitud al servicio
+            multiSelect: true, // archivos 
+            openInNewWindow: false,
+            advanced: {
+                queryParameters: "select=id,name,size,file,photo,@microsoft.graph.downloadUrl", // datos de retorno
+              //  filter: "folder,.png" /* filtra solo tipos de archivos */,
+                redirectUri:"https://oscaruhp.github.io/GeneradorDeCalendario/picker.html"
+            },
+            success: function (response) { 
+                 alert("Archivo trepado y link recuperado");
+
+                 console.log(response);    // Datos en consola para saber que se retorn inclusive retorna el nombre y más
+                 // obtiene las urls de imagenes, descarga y para guardar en inputs
+                 document.getElementById('imagen').src=response['value'][0]['@microsoft.graph.downloadUrl'];
+                 document.getElementById('texto').value=response['value'][0]['@microsoft.graph.downloadUrl'];
+                 document.getElementById('link').href=response['value'][0]['@microsoft.graph.downloadUrl'];
+                   },
+            cancel: function () {
+                                 console.log(); // el usuario canceló 
+                                 },
+            error: function (e) { 
+                    console.log(e); // hubo un error 
+            }
+        };
+        OneDrive.open(odOptions);
+    }
+    </script>
+   
+      <button onclick="launchOneDrivePicker()">Cargar en One Drive </button>
+     
+
+</body>
+</html>
